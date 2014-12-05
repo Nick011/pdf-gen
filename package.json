@@ -1,0 +1,15 @@
+{
+  "name": "application-name",
+  "version": "0.0.3",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "3.2.6",
+    "jade": "*",
+    "webshot": "*",
+    "node-uuid": "*",
+    "ua-parser-js": "*"
+  }
+}
