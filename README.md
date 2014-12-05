@@ -2,7 +2,7 @@ PDF-GEN
 =====================
 
 
-A web service for generating PDFs from HTML.
+A web service for generating PDFs from HTML. It's ideal for converting html forms or customizable letters into PDFs ready to print and mail to customers.
 
 *** Example:
 ```
