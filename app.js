@@ -1,5 +1,5 @@
 var express = require('express')
-	, restrict = require('./lib/restrict')
+  , restrict = require('./lib/restrict')
   , routes = require('./routes')
   , pdf = require('./routes/pdf')
   , http = require('http')
@@ -26,11 +26,11 @@ app.set('view engine', 'jade');
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(function(req, res, next) {
-  var browser = uaParser.setUA(req.headers['user-agent']).getBrowser();
-  if (browser.name === 'IE' && browser.major < 10) {
+var browser = uaParser.setUA(req.headers['user-agent']).getBrowser();
+if (browser.name === 'IE' && browser.major < 10) {
     var data = '';
     req.setEncoding('utf8');
-    req.on('data', function(chunk) { 
+    req.on('data', function(chunk) {
         data += chunk;
     });
     req.on('end', function() {
@@ -49,8 +49,8 @@ app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
-if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
+if (app.get('env') === 'development') {
+   app.use(express.errorHandler());
 }
 
 app.get('/', routes.index);

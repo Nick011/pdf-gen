@@ -5,28 +5,28 @@ var fs = require('fs')
 	, token = require('../lib/restrict').token;
 
 exports.create = function(req, res) {
-	var pdfName = uuid.v1() + '.pdf'
-		, doc = req.param('doc') || JSON.parse(req.rawBody).doc;
-	
-	doc = '<!doctype html><html>'+ doc +'</html>';
+  var pdfName = uuid.v1() + '.pdf'
+    , doc = req.body.doc;
+
+  doc = '<!doctype html><html>'+ doc +'</html>';
 
   rasterize(doc, pdfName, function(err, file) {
-		var c = {};
+		var context = {};
 		if (err) {
-			c.error = true;
-			c.message = err;
-			res.json(c, 500);
+			context.error = true;
+			context.message = err;
+			res.json(context, 500);
 			return false;
 		}
 
-		c = ({
-			url: file.name + '/' + token,
+		context = ({
+			url: [req.headers.host, 'pdf', file.name, token].join('/'),
 			error: false,
 			message: ''
 		});
 
 		res.set('Content-Type', 'text/plain');
-		res.send(c);
+		res.send(context);
 
 		//delete file after 2 minutes
 		(function(file) {
